@@ -2,7 +2,7 @@
 
 A small python script to check Vaccine slot and notify using WhatsApp.
 
-![WhatsApp Image](WhatsApp.jpeg){height=500}
+![WhatsApp Image](WhatsApp.jpeg)
 
 # Execute
 
