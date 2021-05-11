@@ -161,9 +161,9 @@ def send_msg(mobile_number, msg):
 # In[4]:
 
 
-age = 18
-num_days = 3
-interval = 10
+age = 18      
+num_days = 3  # Number of Days to look vaccine slots for
+interval = 10  # time interval at which to check the vaccine splots [in seconds]
 
 mobile1 = "+917061255xxx" # Mobile number with country code
     
@@ -174,7 +174,7 @@ while True:
         counter = data['available_capacity'].sum()
         msg = build_message_text(data)
         send_msg(mobile1, msg) 
-        time.sleep(10)
+        time.sleep(interval)
     else:
         print('Vaccine slots found.')
         break 
