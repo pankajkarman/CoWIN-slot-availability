@@ -96,7 +96,7 @@ def get_availability(
     min_age=18,
     state="Bihar",
     districts=["Patna", "Muzaffarpur", "Vaishali"],
-    blocks=["Saraiya", "Vaishali", "Paroo"],
+    blocks=["Saraiya", "Vaishali", "Paroo", 'Lalganj', 'Marwan']
 ):
     cowin = CoWinAPI()
     data = pd.DataFrame([])
@@ -156,28 +156,42 @@ def send_msg(mobile_number, msg):
         from_=FROM_WHATSAPP_NUMBER,
         to="whatsapp:" + mobile_number,
     )
+    
+def get_trigger(count, interval):
+    trigger = False
+    hr = 3600
+    hnum = int(hr / interval)
+    rem = count % hnum
+    if rem == 0:
+        trigger = True
+    return trigger
 
 
 # In[4]:
 
 
-age = 18      
-num_days = 3  # Number of Days to look vaccine slots for
-interval = 10  # time interval at which to check the vaccine splots [in seconds]
+age = 18
+num_days = 3
+interval = 10
 
-mobile1 = "+917061255xxx" # Mobile number with country code
-    
+mobiles = ["+91706125xxxx", "+9162006xxxxx", "+9162998xxxxx"]
+
 counter = 0
+count = 1
 while True:
     if counter == 0:
         data = get_data(num_days)
         counter = data['available_capacity'].sum()
-        msg = build_message_text(data)
-        send_msg(mobile1, msg) 
+        count += 1
+        trigger = get_trigger(count, interval)
+        print(trigger)
+        if trigger:
+            msg = build_message_text(data)
+            for mobile in mobiles:
+                send_msg(mobile, msg)  
         time.sleep(interval)
     else:
         print('Vaccine slots found.')
         break 
         
 print("Script run over!!")
-

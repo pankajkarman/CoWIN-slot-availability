@@ -6,13 +6,15 @@ A small python script to check Vaccine slot and notify using WhatsApp.
 
 # Execute
 
-First set up the time interval at which you want run the script interatively. Currently set at 10 Seconds.
+First set up the time interval at which you want to run the script interatively; currently set at 10 seconds.
 
 Run the script using
 
 ```python
 python vaccine.py
 ```
+
+This script send messages at hourly intervals untill the vaccine slot is found.
 
 ## Dependencies
 
